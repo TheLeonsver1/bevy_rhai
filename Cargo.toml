@@ -1,0 +1,13 @@
+[package]
+name = "bevy_rhai"
+version = "0.1.0"
+authors = ["Leon <sverdleon@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+bevy = "0.5.0"
+rhai = {version = "0.20.2", features = ["sync"]}
+anyhow = "1.0"
+serde = {version = "1", features = ["derive"]}
