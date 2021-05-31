@@ -8,6 +8,7 @@ edition = "2018"
 
 [dependencies]
 bevy = "0.5.0"
-rhai = {version = "0.20.2", features = ["sync"]}
 anyhow = "1.0"
 serde = {version = "1", features = ["derive"]}
+[dev-dependencies]
+rhai = {version = "0.20.2", features = ["sync"]}
