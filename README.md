@@ -1,6 +1,6 @@
 # bevy_rhai
 
-A plugin to help loading `rhai` scripts into a Bevy game
+A plugin to help load `rhai` scripts into a Bevy game
 
 ## License
 
