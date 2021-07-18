@@ -112,7 +112,7 @@ macro_rules! register_bvecn {
     ($engine:ident, $vec_type:ident) => {
         $engine.register_type::<$vec_type>();
         $engine.register_fn("all", $vec_type::all);
-        $engine.register_fn("all", $vec_type::any);
+        $engine.register_fn("any", $vec_type::any);
     };
 }
 
