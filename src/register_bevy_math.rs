@@ -10,6 +10,7 @@ macro_rules! register_float_vecn {
             .register_fn("dot", $vec_type::dot)
             .register_fn("normalize", $vec_type::normalize)
             .register_fn("normalize_or_zero", $vec_type::normalize_or_zero)
+            .register_fn("is_normalized", $vec_type::is_normalized)
             .register_fn("cross", $vec_type::cross);
     };
     ($engine:ident, $vec_type:ident,$scalar:ident,2) => {
@@ -18,6 +19,7 @@ macro_rules! register_float_vecn {
             .register_fn("distance_squared", $vec_type::distance_squared)
             .register_fn("normalize", $vec_type::normalize)
             .register_fn("normalize_or_zero", $vec_type::normalize_or_zero)
+            .register_fn("is_normalized", $vec_type::is_normalized)
             .register_fn("dot", $vec_type::dot)
     };
 }
