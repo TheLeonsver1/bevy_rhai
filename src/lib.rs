@@ -5,6 +5,8 @@ use bevy::{
 };
 use serde::Deserialize;
 
+pub mod register_bevy_math;
+
 #[derive(Debug, Deserialize, TypeUuid)]
 #[uuid = "c65283c9-420f-49b4-a99a-56d054160294"]
 pub struct RhaiScript {
@@ -44,7 +46,7 @@ impl AssetLoader for RhaiScriptLoader {
 pub struct BevyRhaiPlugin;
 
 impl Plugin for BevyRhaiPlugin {
-    fn build(&self, app: &mut AppBuilder) {
+    fn build(&self, app: &mut App) {
         app.add_asset::<RhaiScript>()
             .init_asset_loader::<RhaiScriptLoader>();
     }
