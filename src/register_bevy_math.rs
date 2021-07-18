@@ -151,6 +151,13 @@ pub fn register_bevy_math_types(engine: &mut Engine) {
     register_vec2!(engine, UVec2, u32);
     register_vecn_conversion_to_f32!(engine, UVec2, u32);
 
+    register_quat(engine);
+
+    register_bvecn!(engine, BVec3);
+    register_bvecn!(engine, BVec2);
+}
+
+pub fn register_quat(engine: &mut Engine) {
     engine.register_type::<Quat>();
     //Instantiating
     engine.register_fn("from_xyzw", Quat::from_xyzw);
@@ -171,7 +178,4 @@ pub fn register_bevy_math_types(engine: &mut Engine) {
     engine.register_fn("is_normalized", Quat::is_normalized);
     engine.register_fn("to_euler", Quat::to_euler);
     engine.register_fn("to_axis_angle", Quat::to_axis_angle);
-
-    register_bvecn!(engine, BVec3);
-    register_bvecn!(engine, BVec2);
 }
