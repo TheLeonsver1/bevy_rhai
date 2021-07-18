@@ -3,7 +3,7 @@ use rhai::Engine;
 use std::ops::*;
 
 macro_rules! register_float_vecn {
-    ($engine:ident, $vec_type:ident,$scalar:ident,3) => {
+    ($engine:ident, $vec_type:ident,$scalar:ident) => {
         $engine
             .register_fn("distance", $vec_type::distance)
             .register_fn("distance_squared", $vec_type::distance_squared)
@@ -11,16 +11,17 @@ macro_rules! register_float_vecn {
             .register_fn("normalize", $vec_type::normalize)
             .register_fn("normalize_or_zero", $vec_type::normalize_or_zero)
             .register_fn("is_normalized", $vec_type::is_normalized)
-            .register_fn("cross", $vec_type::cross);
-    };
-    ($engine:ident, $vec_type:ident,$scalar:ident,2) => {
-        $engine
-            .register_fn("distance", $vec_type::distance)
-            .register_fn("distance_squared", $vec_type::distance_squared)
-            .register_fn("normalize", $vec_type::normalize)
-            .register_fn("normalize_or_zero", $vec_type::normalize_or_zero)
-            .register_fn("is_normalized", $vec_type::is_normalized)
-            .register_fn("dot", $vec_type::dot)
+            .register_fn("recip", $vec_type::recip)
+            .register_fn("angle_between", $vec_type::angle_between)
+            .register_fn("lerp", $vec_type::lerp)
+            .register_fn("length_recip", $vec_type::length_recip)
+            .register_fn("clamp", $vec_type::clamp)
+            .register_fn("ceil", $vec_type::ceil)
+            .register_fn("floor", $vec_type::floor)
+            .register_fn("exp", $vec_type::exp)
+            .register_fn("clamp_length", $vec_type::clamp_length)
+            .register_fn("clamp_length_max", $vec_type::clamp_length_max)
+            .register_fn("clamp_length_min", $vec_type::clamp_length_min)
     };
 }
 
@@ -51,14 +52,23 @@ macro_rules! register_vecn {
             <$vec_type as DivAssign<$vec_type>>::div_assign,
         );
         //Convenience
-        $engine.register_fn("extend", $vec_type::extend);
         $engine.register_fn("to_array", $vec_type::to_array);
+        $engine.register_fn("splat", $vec_type::splat);
+        //  (TODO:i don't register Vec4s atm, this would be meaningless on them since they won't be possible to use)
+        $engine.register_fn("max", $vec_type::max);
+        $engine.register_fn("max_element", $vec_type::max_element);
+        $engine.register_fn("min", $vec_type::min);
+        $engine.register_fn("min", $vec_type::min_element);
+
+
         //Comparing
         $engine.register_fn("cmple", $vec_type::cmple);
         $engine.register_fn("cmplt", $vec_type::cmplt);
         $engine.register_fn("cmpge", $vec_type::cmpge);
         $engine.register_fn("cmpgt", $vec_type::cmpgt);
         $engine.register_fn("cmpeq", $vec_type::cmpeq);
+        $engine.register_fn("cmpne", $vec_type::cmpne);
+
     };
 }
 macro_rules! register_vecn_conversion_to_f32 {
@@ -101,12 +111,14 @@ macro_rules! register_vec3 {
         register_vecn!($engine, $vec_type, $scalar);
         register_getters_and_setters_vec2!($engine, $vec_type, $scalar);
         complete_getters_and_setters_to_vec3!($engine, $vec_type, $scalar);
+        $engine.register_fn("truncate", $vec_type::truncate)
     };
 }
 macro_rules! register_vec2 {
     ($engine:ident, $vec_type:ident,$scalar:ident) => {
         register_vecn!($engine, $vec_type, $scalar);
         register_getters_and_setters_vec2!($engine, $vec_type, $scalar);
+        $engine.register_fn("extend", $vec_type::extend);
     };
 }
 
@@ -120,7 +132,9 @@ macro_rules! register_bvecn {
 
 pub fn register_bevy_math_types(engine: &mut Engine) {
     register_vec3!(engine, Vec3, f32);
-    register_float_vecn!(engine, Vec3, f32, 3);
+    register_float_vecn!(engine, Vec3, f32);
+    //Vec2 doesn't have cross
+    engine.register_fn("cross", Vec3::cross);
     register_signed!(engine, Vec3, f32);
     register_vec3!(engine, IVec3, i32);
     register_vecn_conversion_to_f32!(engine, IVec3, i32);
@@ -129,7 +143,7 @@ pub fn register_bevy_math_types(engine: &mut Engine) {
     register_vecn_conversion_to_f32!(engine, UVec3, u32);
 
     register_vec2!(engine, Vec2, f32);
-    register_float_vecn!(engine, Vec2, f32, 2);
+    register_float_vecn!(engine, Vec2, f32);
     register_signed!(engine, Vec2, f32);
     register_vec2!(engine, IVec2, i32);
     register_vecn_conversion_to_f32!(engine, IVec2, i32);
