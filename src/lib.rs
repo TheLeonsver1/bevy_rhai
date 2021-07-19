@@ -7,6 +7,9 @@ use serde::Deserialize;
 
 pub mod register_bevy_math;
 
+pub use rhai::*;
+
+
 #[derive(Debug, Deserialize, TypeUuid)]
 #[uuid = "c65283c9-420f-49b4-a99a-56d054160294"]
 pub struct RhaiScript {
