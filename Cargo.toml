@@ -11,3 +11,7 @@ bevy = { git = "https://github.com/StarArawn/bevy", rev = "5a36a4eedfe7ffd8ded8a
 anyhow = "1.0"
 serde = {version = "1", features = ["derive"]}
 rhai = {version = "0.20.2", features = ["sync"]}
+
+
+[features]
+"f32_float" = ["rhai/f32_float"]
