@@ -15,3 +15,4 @@ rhai = {version = "0.20.2", features = ["sync"]}
 
 [features]
 "f32_float" = ["rhai/f32_float"]
+"only_i32" = ["rhai/only_i32"]
