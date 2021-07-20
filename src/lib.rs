@@ -6,8 +6,10 @@ use bevy::{
 use serde::Deserialize;
 
 pub mod register_bevy_math;
+pub mod rhai{
+    pub use rhai::*;
+}
 
-pub use rhai::*;
 
 
 #[derive(Debug, Deserialize, TypeUuid)]
