@@ -1,6 +1,6 @@
 use bevy::{ecs::schedule::ShouldRun, prelude::*};
-use bevy_rhai::*;
-use rhai::*;
+use bevy_rhai::{rhai::*, *};
+
 fn main() {
     App::default()
         .add_plugins(DefaultPlugins)
