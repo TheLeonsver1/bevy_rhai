@@ -7,7 +7,7 @@ license = "MIT OR Apache-2.0"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-bevy = { git = "https://github.com/bevyengine/bevy.git", rev = "2e99d84cdce0fd4ce77de274a01e9c621c9eb423" }
+bevy = { git = "https://github.com/bevyengine/bevy.git", rev = "43d99bb583866c1adb4aa88f19b88637df0a7f33" }
 anyhow = "1.0"
 serde = {version = "1", features = ["derive"]}
 rhai = {version = "1", features = ["sync"]}
