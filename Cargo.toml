@@ -3,12 +3,16 @@ name = "bevy_rhai"
 version = "0.1.0"
 authors = ["Leon <sverdleon@gmail.com>"]
 edition = "2018"
-
+license = "MIT OR Apache-2.0"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-bevy = "0.5.0"
+bevy = { git = "https://github.com/bevyengine/bevy.git", branch = "main", default_features = false }
 anyhow = "1.0"
 serde = {version = "1", features = ["derive"]}
-[dev-dependencies]
-rhai = {version = "0.20.2", features = ["sync"]}
+rhai = {version = "1", features = ["sync"]}
+
+
+[features]
+"f32_float" = ["rhai/f32_float"]
+"only_i32" = ["rhai/only_i32"]
